@@ -1,4 +1,4 @@
-#!/bin/csh -f
+#!/bin/csh -fx
 
 # Download GFS global longitude-latitude grid in grib2 format
 
@@ -15,7 +15,7 @@ endif
 setenv CLEANDAY `date +%Y%m%d -d "-10 days"`
 
 # setenv TODAY 20181106
-setenv BASEDATA /data/wangf/gfs_forecast/
+setenv BASEDATA /data/GFS/
 setenv GFSDIR $BASEDATA/${TODAY}${GFSSTART}
 
 echo "rm -rf ${BASEDATA}/${CLEANDAY}${GFSSTART}"
@@ -89,6 +89,9 @@ end
 end
 
 mv $GFSDIR ${GFSDIR}c
+if $GFSSTART == 00 then
+    scp -r -P 11999 ${GFSDIR}c wangf@hpc.bj:/data/wangf/gfs_forecast/
+endif
 
 echo `date` "*** Finished GFS data download ***"
 

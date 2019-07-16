@@ -19,7 +19,7 @@ setenv BASEDATA /data/GFS/
 setenv GFSDIR $BASEDATA/${TODAY}${GFSSTART}
 
 echo "rm -rf ${BASEDATA}/${CLEANDAY}${GFSSTART}"
-rm -rf ${BASEDATA}/${CLEANDAY}${GFSSTART}c
+#rm -rf ${BASEDATA}/${CLEANDAY}${GFSSTART}c
 
 if ( ! -d $GFSDIR ) mkdir -p $GFSDIR
 

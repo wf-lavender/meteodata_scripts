@@ -2,21 +2,24 @@
 
 # Download GDAS global observations in burf/prepbufr format.
 
-setenv TODAY `date +"%Y%m%d"`
+#setenv TODAY `date +"%Y%m%d"`
 #setenv TODAY_JULIAN `date -u +"%Y%j"`
 #setenv TODAY_DAYOFWEEK `date -u +"%u"`
 setenv YESTERDAY `date +%Y%m%d -d "-1 days"`
-setenv GDASSTART $1
+# GETTIME must be fit to the GDAS initial time
+setenv GETTIME `date -u +%Y%m%d%H -d "-6 hours"`
+setenv GDASSTART `echo $GETTIME | cut -c9-10`
+setenv TODAY `echo $GETTIME | cut -c1-8`
 
 echo GDASSTART
 setenv CLEANDAY `date +%Y%m%d -d "-7 days"`
 
-setenv BASEDATA /data/wangf/gdas_obs/
+setenv BASEDATA /data/gdas_obs/
 
 #    setenv TODAY $YESTERDAY
-if ($GDASSTART == 18 || $GDASSTART == 12) then
-    setenv TODAY $YESTERDAY
-endif
+#if ($GDASSTART == 18 || $GDASSTART == 12) then
+#    setenv TODAY $YESTERDAY
+#endif
 
 #setenv TODAY 20180412
 setenv GDASDIR $BASEDATA/${TODAY}${GDASSTART}
@@ -63,6 +66,9 @@ end
 
 end
 
-echo `date` "*** Finished GDAS data download ***"
+if ($GDASSTART == 18 || $GDASSTART == 06) then
+    scp -r -P 11999 ${GDASDIR} wangf@hpc.bj:/data/wangf/gdas_obs/
+endif
 
+echo `date` "*** Finished GDAS data download ***"
 exit(0)

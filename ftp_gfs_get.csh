@@ -30,7 +30,7 @@ if $2 == "cloudhpc" then
     # domestic mirror site, begin synchronization at UTC 03:25, 09:25, 15:25, 21:25
     set url_dir = http://fast.cloudhpc.com.cn/gfs/gfs.${TODAY}${GFSSTART}
 else
-    set url_dir = ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.${TODAY}${GFSSTART}
+    set url_dir = ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.${TODAY}/${GFSSTART}
     #set url_dir = ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/gfs/para/gfs.${TODAY}${GFSSTART}
 endif
 
